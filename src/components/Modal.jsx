@@ -12,7 +12,7 @@ handleKeyDown = evt => {
         this.props.onClose()}
 }
 handleBackdropClick = e => {
-    if(e.target === e.curentTarget){
+    if(e.target === e.currentTarget){
         this.props.onClose()
     }
 }

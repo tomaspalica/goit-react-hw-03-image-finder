@@ -4,6 +4,8 @@ import { Component } from "react";
 import { ImageGallery } from "./ImageGallery";
 import { Button } from "./Button";
 import { Modal } from "./Modal";
+import { Loader } from "./Loader";
+import BarLoader from "react-spinners/BarLoader";
 const MY_KEY = "38099797-78dca8015a0d6056d487ea901"
 
 export class App extends Component{
@@ -14,10 +16,12 @@ export class App extends Component{
    modalSrc : "",
    modalAlt : "",
    showModal : false,
+   loading : false,
   }
  
 componentDidUpdate(prevProps, prevState) {
     if(prevState.search !== this.state.search){
+      this.setState({ loading: true });
       fetch(`https://pixabay.com/api/?key=${MY_KEY}&q=${this.state.search}&image_type=photo&page=${this.state.page}`)
       .then(response => {
         if (!response.ok) {
@@ -26,7 +30,7 @@ componentDidUpdate(prevProps, prevState) {
         return response.json();
       })
       .then(imgData => {
-       return this.setState({data: imgData.hits})
+       return this.setState({loading: false, data: imgData.hits})
     
       })
       
@@ -41,7 +45,7 @@ componentDidUpdate(prevProps, prevState) {
       .then(imgData => {
        return this.setState((prevState) => {
         
-        return {data: [...prevState.data, ...imgData.hits]}})
+        return {loading: false, data: [...prevState.data, ...imgData.hits]}})
     
       })
     } else {
@@ -51,14 +55,14 @@ componentDidUpdate(prevProps, prevState) {
     
     
 }
-openModal =({imgSrc, imgAlt}) => {
+openModal =(imgSrc, imgAlt) => {
   this.setState({
     showModal: true,
   modalSrc : imgSrc,
   modalAlt : imgAlt,
   })
-console.log(this.state)
 }
+
 closeModal = () => {
   this.setState({
     showModal: false,
@@ -84,10 +88,17 @@ searchPicture =({name}) =>{
   return (
     <div >
      <Searchbar onSubmit={this.searchPicture}></Searchbar>
+     <BarLoader
+ height={4}
+ width={100}
+ color="#36d7b7"
+ loading={this.state.loading}
+ />
     <ImageGallery data={this.state.data} openModal={this.openModal}/>
     {this.state.data.length > 0 && <Button onClick={this.handleLoadMore}/> }
+ 
     {this.state.showModal && (
-      <Modal onClose ={ this.closeModal}
+      <Modal onClose={ this.closeModal}
       modalSrc={this.state.modalSrc}
       modalAlt={this.state.modalAlt}
       />
