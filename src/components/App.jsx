@@ -88,12 +88,7 @@ searchPicture =({name}) =>{
   return (
     <div >
      <Searchbar onSubmit={this.searchPicture}></Searchbar>
-     <BarLoader
- height={4}
- width={100}
- color="#36d7b7"
- loading={this.state.loading}
- />
+   <Loader loading={this.state.loading}/>
     <ImageGallery data={this.state.data} openModal={this.openModal}/>
     {this.state.data.length > 0 && <Button onClick={this.handleLoadMore}/> }
  

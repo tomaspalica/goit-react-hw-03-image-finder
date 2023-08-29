@@ -1,5 +1,13 @@
 import { Audio } from 'react-loader-spinner'
-import ClipLoader from "react-spinners/ClipLoader";
-// export const Loader = () => (
-//     <BarLoader color="#36d7b7" />
-// )
+import BarLoader from "react-spinners/BarLoader";
+
+export const Loader = ({loading}) => (
+   
+    <BarLoader
+    
+    height={4}
+    width={100}
+    color="#36d7b7"
+    loading={loading} />
+    
+)
