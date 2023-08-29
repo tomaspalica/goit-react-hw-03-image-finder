@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid"
+
 import { ImageGalleryItem } from "./ImageGalleryItem"
 import PropTypes from "prop-types"
 import css from '../css/ImageGallery.module.css'

@@ -1,11 +1,11 @@
-import axios from "axios";
+
 import { Searchbar } from "./Searchbar";
 import { Component } from "react";
 import { ImageGallery } from "./ImageGallery";
 import { Button } from "./Button";
 import { Modal } from "./Modal";
 import { Loader } from "./Loader";
-import BarLoader from "react-spinners/BarLoader";
+
 const MY_KEY = "38099797-78dca8015a0d6056d487ea901"
 
 export class App extends Component{
