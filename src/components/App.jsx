@@ -81,7 +81,7 @@ this.setState((prevState) => {
 }
 searchPicture =({name}) =>{
   this.setState ({search : name}) 
-  console.log(this.state)
+ 
  
 }
   render(){
